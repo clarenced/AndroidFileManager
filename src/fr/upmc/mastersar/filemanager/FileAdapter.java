@@ -28,7 +28,7 @@ public class FileAdapter extends ArrayAdapter<File> {
 					Context.LAYOUT_INFLATER_SERVICE);
 			view = li.inflate(R.layout.cell_list, null);
 		}
-		
+
 		Resources res = view.getResources();
 		File file = getItem(position);
 		if (file != null) {
@@ -43,15 +43,29 @@ public class FileAdapter extends ArrayAdapter<File> {
 	}
 
 	public Drawable getImageForExtension(File file, Resources res) {
-		// String filename = file.getName();
-		// int dotPos = filename.lastIndexOf(".");
-		// String extension = filename.substring(dotPos);
 		Drawable d = null;
-
+		
 		if (file.isDirectory()) {
 			d = res.getDrawable(R.drawable.dossier);
 		} else {
-			d = res.getDrawable(R.drawable.fichier);
+			
+			String filename = file.getName();
+			int dotPos = filename.lastIndexOf(".");
+			String extension = filename.substring(dotPos);			
+			
+			if (!extension.equals("")) {
+				if (extension.equals("mp3") || extension.equals("amr")) {
+					d = res.getDrawable(R.drawable.musique);
+				} else if (extension.equals("mp4") || extension.equals("avi")
+						|| extension.equals("mpg")) {
+					d = res.getDrawable(R.drawable.film);
+				} else {
+					d = res.getDrawable(R.drawable.fichier);
+				}
+			} else {
+				d = res.getDrawable(R.drawable.fichier);
+			}
+
 		}
 
 		return d;
