@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -55,7 +56,9 @@ public class FileAdapter extends ArrayAdapter<File> {
 		} else {
 			
 			String filename = file.getName();
+			Log.i("INFO", "fileadapater - File name -->" + filename);
 			int dotPos = filename.lastIndexOf(".");
+			Log.i("INFO", "fileadapater - File name -->" + dotPos);
 			String extension = filename.substring(dotPos);			
 			
 			if (!extension.equals("")) {
