@@ -1,6 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<TextView xmlns:android="http://schemas.android.com/apk/res/android"
-	android:id="@+id/text" android:layout_width="wrap_content"
-	android:layout_height="wrap_content" 
-	android:textSize="20px"
-	/>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+	android:orientation="horizontal" android:layout_width="fill_parent"
+	android:layout_height="fill_parent" android:id="@+id/layout">
+	<ImageView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/icon" android:layout_width="wrap_content"
+		android:layout_height="wrap_content" android:src="@drawable/icon" />
+	<TextView xmlns:android="http://schemas.android.com/apk/res/android"
+		android:id="@+id/text" android:layout_width="fill_parent"
+		android:layout_height="wrap_content" android:layout_toRightOf="@+id/icon"
+		android:layout_marginLeft="15px" android:textSize="32px"
+		/>
+</RelativeLayout>
