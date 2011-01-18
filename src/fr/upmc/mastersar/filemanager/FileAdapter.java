@@ -1,6 +1,7 @@
 package fr.upmc.mastersar.filemanager;
 
 import java.io.File;
+import java.util.List;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -14,8 +15,12 @@ import android.widget.TextView;
 
 public class FileAdapter extends ArrayAdapter<File> {
 
-	public FileAdapter(Context context, int textViewResourceId, File[] objects) {
-		super(context, textViewResourceId, objects);
+
+	
+
+	public FileAdapter(Context context, int resource,
+			List<File> objects) {
+		super(context, resource,objects);
 	}
 
 	@Override

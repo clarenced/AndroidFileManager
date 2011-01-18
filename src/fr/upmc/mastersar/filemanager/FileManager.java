@@ -2,6 +2,8 @@ package fr.upmc.mastersar.filemanager;
 
 import java.io.File;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import android.app.ListActivity;
 import android.content.Context;
@@ -19,11 +21,11 @@ public class FileManager extends ListActivity {
 
 	private String currentpath;
 
-	private File[] files_list;
+	private List<File> files_list = new ArrayList<File>();;
 
 	private Context currentContext;
 
-	private FileAdapter fileAdapter;
+	private FileAdapter fileAdapter; 
 
 	/** Called when the activity is first created. */
 	@Override
@@ -35,12 +37,15 @@ public class FileManager extends ListActivity {
 		TextView path = (TextView) this.findViewById(R.id.path);
 
 		File f = Environment.getRootDirectory();
-		files_list = f.listFiles();
+		File[] files_array  = f.listFiles();
+		for( File fic : files_array){
+			files_list.add(fic);
+		}
 		currentpath = f.getPath();
 		path.setText(currentpath);
 
-		fileAdapter = new FileAdapter(this, R.layout.cell_list, files_list);
-		fileAdapter.setNotifyOnChange(true);
+		
+		fileAdapter = new FileAdapter(this, R.layout.cell_list, files_list);		
 		getListView().setAdapter(fileAdapter);
 
 		getListView().setOnItemClickListener(new OnItemClickListener() {
@@ -66,14 +71,15 @@ public class FileManager extends ListActivity {
 							filename.getName() + " is a directory", 15).show();
 
 					currentpath = filename.getCanonicalPath();
-
 					path.setText(currentpath);
-					files_list = updateFileList(filename);
-					fileAdapter.notifyDataSetChanged();
-					for (File f : files_list) {
-						Log.i("INFO", "file name : " + f.getName());
+					
+					files_list.clear();
+					File[] farray = filename.listFiles();
+					for(File f: farray){
+						files_list.add(f);
 					}
-
+					fileAdapter.notifyDataSetChanged();
+					
 				} else {
 					Toast.makeText(currentContext,
 							filename.getName() + " is a file", 15).show();
@@ -89,14 +95,7 @@ public class FileManager extends ListActivity {
 
 	}
 
-	private File[] updateFileList(File fileName) {
-
-		for (File f : files_list) {
-			f = null;
-		}
-		files_list = null;
-		return fileName.listFiles();
-	}
+	
 
 	/*
 	 * (non-Javadoc)
