@@ -64,14 +64,16 @@ public class FileManager extends ListActivity {
 				if (filename.isDirectory()) {
 					Toast.makeText(currentContext,
 							filename.getName() + " is a directory", 15).show();
-					
+
 					currentpath = filename.getCanonicalPath();
+
 					path.setText(currentpath);
 					files_list = updateFileList(filename);
-					for(File f : files_list){
+					fileAdapter.notifyDataSetChanged();
+					for (File f : files_list) {
 						Log.i("INFO", "file name : " + f.getName());
 					}
-										
+
 				} else {
 					Toast.makeText(currentContext,
 							filename.getName() + " is a file", 15).show();
@@ -86,12 +88,10 @@ public class FileManager extends ListActivity {
 		}
 
 	}
-	
-	
 
 	private File[] updateFileList(File fileName) {
-		
-		for(File f : files_list){
+
+		for (File f : files_list) {
 			f = null;
 		}
 		files_list = null;
