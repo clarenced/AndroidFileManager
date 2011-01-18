@@ -20,7 +20,7 @@
 	</RelativeLayout>
 
 	<TextView android:id="@+id/path" android:layout_width="fill_parent"
-		android:layout_height="wrap_content" android:text="@string/home"
+		android:layout_height="wrap_content"
 		android:textSize="35px" />
 
 	<ListView android:id="@android:id/list" android:layout_width="fill_parent"
