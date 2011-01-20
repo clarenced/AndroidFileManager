@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,7 +34,7 @@ public class FileManager extends ListActivity implements
 
 	TextView path;
 
-	private File parent, root;
+	private File parent, root,currentDirectory;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -53,6 +54,8 @@ public class FileManager extends ListActivity implements
 		File f = Environment.getExternalStorageDirectory();
 		parent = null;
 		root = f.getParentFile();
+		currentDirectory = f;
+		
 		File[] files_array = f.listFiles();
 		for (File fic : files_array) {
 			if (fic.canRead())
@@ -70,18 +73,15 @@ public class FileManager extends ListActivity implements
 			public void onItemClick(AdapterView<?> adapter, View view,
 					int position, long id) {
 				File filename = (File) adapter.getItemAtPosition(position);
-				if( filename.isDirectory())
+				if (filename.isDirectory())
 					updateListView(filename);
 				else
-					startIntent(filename);
+					startIntent(filename.getName());
 			}
 		});
 	}
 
-	protected void startIntent(File filename) {
-		
-		
-	}
+	protected void startIntent(String filename) {}
 
 	public void updateListView(File filename) {
 
@@ -91,6 +91,7 @@ public class FileManager extends ListActivity implements
 				Toast.makeText(currentContext,
 						filename.getName() + " is a directory", 15).show();
 				parent = filename.getParentFile();
+				currentDirectory = filename;
 				updateDirectory(filename);
 			} else {
 				Toast.makeText(currentContext,
@@ -176,9 +177,18 @@ public class FileManager extends ListActivity implements
 
 		if (f.getParent() != null)
 			parent = f.getParentFile();
-		
+
 		back.setEnabled(!parent.equals(root));
 
+	}
+
+	/* (non-Javadoc)
+	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
+	 */
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		
+		return super.onOptionsItemSelected(item);
 	}
 
 }

@@ -52,15 +52,11 @@ public class FileAdapter extends ArrayAdapter<File> {
 			d = res.getDrawable(R.drawable.dossier);
 		} else {
 			String filename = file.getName();
-			Log.i("INFO", "FileName" + filename);
 			int dotPos = filename.lastIndexOf(".");
-			Log.i("INFO", "Index :" + dotPos);
 			if( dotPos != -1 )
 				extension = filename.substring(dotPos);
 			else
 				extension = "";
-			
-			Log.i("INFO", "Extension : " + extension);
 
 			if (!extension.equals("")) {
 				if (extension.equals(".mp3") || extension.equals(".amr")) {

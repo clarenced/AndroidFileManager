@@ -8,8 +8,8 @@
 
 
 
-<item android:title="Créer un répertoire" android:id="@+id/createDirectory"></item>
-<item android:title="Voir la corbeille" android:id="@+id/seeTrash"></item>
+<item android:title="Créer un répertoire" android:id="@+id/createDirectory" android:icon="@drawable/dossier48"></item>
+<item android:title="Voir la corbeille" android:id="@+id/seeTrash" android:icon="@drawable/corbeille48"></item>
 
-<item android:title="Vider la Corbeille" android:id="@+id/recycleTrash"></item>
+<item android:title="Vider la Corbeille" android:id="@+id/recycleTrash" android:icon="@drawable/suppression48"></item>
 </menu>
