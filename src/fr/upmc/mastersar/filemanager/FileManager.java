@@ -70,10 +70,17 @@ public class FileManager extends ListActivity implements
 			public void onItemClick(AdapterView<?> adapter, View view,
 					int position, long id) {
 				File filename = (File) adapter.getItemAtPosition(position);
-				updateListView(filename);
-
+				if( filename.isDirectory())
+					updateListView(filename);
+				else
+					startIntent(filename);
 			}
 		});
+	}
+
+	protected void startIntent(File filename) {
+		
+		
 	}
 
 	public void updateListView(File filename) {

@@ -16,12 +16,8 @@ import android.widget.TextView;
 
 public class FileAdapter extends ArrayAdapter<File> {
 
-
-	
-
-	public FileAdapter(Context context, int resource,
-			List<File> objects) {
-		super(context, resource,objects);
+	public FileAdapter(Context context, int resource, List<File> objects) {
+		super(context, resource, objects);
 	}
 
 	@Override
@@ -50,23 +46,37 @@ public class FileAdapter extends ArrayAdapter<File> {
 
 	public Drawable getImageForExtension(File file, Resources res) {
 		Drawable d = null;
+		String extension = "";
 		
 		if (file.isDirectory()) {
 			d = res.getDrawable(R.drawable.dossier);
-		} else {			
+		} else {
 			String filename = file.getName();
 			Log.i("INFO", "FileName" + filename);
 			int dotPos = filename.lastIndexOf(".");
 			Log.i("INFO", "Index :" + dotPos);
-			String extension = filename.substring(dotPos);			
-			Log.i("INFO", "Extension : " + extension);
+			if( dotPos != -1 )
+				extension = filename.substring(dotPos);
+			else
+				extension = "";
 			
+			Log.i("INFO", "Extension : " + extension);
+
 			if (!extension.equals("")) {
 				if (extension.equals(".mp3") || extension.equals(".amr")) {
 					d = res.getDrawable(R.drawable.musique);
 				} else if (extension.equals(".mp4") || extension.equals(".avi")
 						|| extension.equals(".mpg")) {
 					d = res.getDrawable(R.drawable.film);
+				} else if (extension.equals(".pdf")) {
+					d = res.getDrawable(R.drawable.pdf);
+				} else if (extension.equals(".jpg")
+						|| extension.equals(".jpeg")) {
+					d = res.getDrawable(R.drawable.jpg);
+				} else if (extension.equals(".xml")) {
+					d = res.getDrawable(R.drawable.xml);
+				} else if (extension.equals(".apk")) {
+					d = res.getDrawable(R.drawable.android);
 				} else {
 					d = res.getDrawable(R.drawable.fichier);
 				}
@@ -78,4 +88,5 @@ public class FileAdapter extends ArrayAdapter<File> {
 
 		return d;
 	}
+
 }
