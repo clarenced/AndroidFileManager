@@ -34,7 +34,7 @@ public class FileManager extends ListActivity implements
 
 	TextView path;
 
-	private File parent, root,currentDirectory;
+	private File parent, root, currentDirectory;
 
 	/** Called when the activity is first created. */
 	@Override
@@ -55,7 +55,7 @@ public class FileManager extends ListActivity implements
 		parent = null;
 		root = f.getParentFile();
 		currentDirectory = f;
-		
+
 		File[] files_array = f.listFiles();
 		for (File fic : files_array) {
 			if (fic.canRead())
@@ -81,7 +81,8 @@ public class FileManager extends ListActivity implements
 		});
 	}
 
-	protected void startIntent(String filename) {}
+	protected void startIntent(String filename) {
+	}
 
 	public void updateListView(File filename) {
 
@@ -182,13 +183,35 @@ public class FileManager extends ListActivity implements
 
 	}
 
-	/* (non-Javadoc)
+	/*
+	 * (non-Javadoc)
+	 * 
 	 * @see android.app.Activity#onOptionsItemSelected(android.view.MenuItem)
 	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
+		int idDirectory = ((MenuItem) findViewById(R.id.createDirectory)).getItemId();
+		int idSuppression = ((MenuItem) findViewById(R.id.recycleTrash)).getItemId();
+		int idSeeTrash = ((MenuItem) findViewById(R.id.seeTrash)).getItemId();
+
 		
+
 		return super.onOptionsItemSelected(item);
+	}
+
+	private void seeTrash() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void recycleTrash() {
+		// TODO Auto-generated method stub
+
+	}
+
+	private void createDirectory(File currentDirectory2) {
+		// TODO Auto-generated method stub
+
 	}
 
 }
