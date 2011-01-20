@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu
   xmlns:android="http://schemas.android.com/apk/res/android">
-<item android:title="Partager" android:id="@+id/partager"></item>
-<item android:title="Nouveau Dossier" android:id="@+id/new_directory"></item>
-<item android:title="Supprimer" android:id="@+id/delete"></item>
 
-<item android:title="Aff. Par" android:id="@+id/display"></item>
-<item android:title="Trier par" android:id="@+id/trier"></item>
-<item android:title="Plus" android:id="@+id/more"></item>
+
+
+
+
+
+
+<item android:title="Créer un répertoire" android:id="@+id/createDirectory"></item>
+<item android:title="Voir la corbeille" android:id="@+id/seeTrash"></item>
+
+<item android:title="Vider la Corbeille" android:id="@+id/recycleTrash"></item>
 </menu>

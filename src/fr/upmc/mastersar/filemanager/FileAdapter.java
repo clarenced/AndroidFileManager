@@ -53,19 +53,19 @@ public class FileAdapter extends ArrayAdapter<File> {
 		
 		if (file.isDirectory()) {
 			d = res.getDrawable(R.drawable.dossier);
-		} else {
-			
+		} else {			
 			String filename = file.getName();
-			Log.i("INFO", "fileadapater - File name -->" + filename);
+			Log.i("INFO", "FileName" + filename);
 			int dotPos = filename.lastIndexOf(".");
-			Log.i("INFO", "fileadapater - File name -->" + dotPos);
+			Log.i("INFO", "Index :" + dotPos);
 			String extension = filename.substring(dotPos);			
+			Log.i("INFO", "Extension : " + extension);
 			
 			if (!extension.equals("")) {
-				if (extension.equals("mp3") || extension.equals("amr")) {
+				if (extension.equals(".mp3") || extension.equals(".amr")) {
 					d = res.getDrawable(R.drawable.musique);
-				} else if (extension.equals("mp4") || extension.equals("avi")
-						|| extension.equals("mpg")) {
+				} else if (extension.equals(".mp4") || extension.equals(".avi")
+						|| extension.equals(".mpg")) {
 					d = res.getDrawable(R.drawable.film);
 				} else {
 					d = res.getDrawable(R.drawable.fichier);

@@ -18,7 +18,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class FileManager extends ListActivity implements android.view.View.OnClickListener{
+public class FileManager extends ListActivity implements
+		android.view.View.OnClickListener {
 
 	private String currentpath;
 
@@ -31,7 +32,9 @@ public class FileManager extends ListActivity implements android.view.View.OnCli
 	Button home, back;
 
 	TextView path;
-	
+
+	private File parent, root;
+
 	/** Called when the activity is first created. */
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -43,11 +46,13 @@ public class FileManager extends ListActivity implements android.view.View.OnCli
 
 		home = (Button) this.findViewById(R.id.home);
 		home.setOnClickListener(this);
-		
+
 		back = (Button) this.findViewById(R.id.back);
 		back.setOnClickListener(this);
-		
+
 		File f = Environment.getExternalStorageDirectory();
+		parent = null;
+		root = f.getParentFile();
 		File[] files_array = f.listFiles();
 		for (File fic : files_array) {
 			if (fic.canRead())
@@ -78,6 +83,7 @@ public class FileManager extends ListActivity implements android.view.View.OnCli
 				Log.i("INFO", "---> " + filename.getName());
 				Toast.makeText(currentContext,
 						filename.getName() + " is a directory", 15).show();
+				parent = filename.getParentFile();
 				updateDirectory(filename);
 			} else {
 				Toast.makeText(currentContext,
@@ -123,21 +129,24 @@ public class FileManager extends ListActivity implements android.view.View.OnCli
 
 	@Override
 	public void onClick(View v) {
-		
-		if( v.getId() == home.getId()){
+
+		if (v.getId() == home.getId()) {
 			home();
-		} else if(v.getId() == back.getId()){
+		} else if (v.getId() == back.getId()) {
 			back();
 		}
-		
+
 	}
 
 	private void home() {
 		File f = Environment.getExternalStorageDirectory();
+		files_list.clear();
+
+		back.setEnabled(false);
 		File[] files_array = f.listFiles();
+		parent = null;
 		for (File fic : files_array) {
-			if (fic.canRead())
-				files_list.add(fic);
+			files_list.add(fic);
 		}
 		currentpath = f.getPath();
 		path.setText(currentpath);
@@ -145,8 +154,24 @@ public class FileManager extends ListActivity implements android.view.View.OnCli
 	}
 
 	private void back() {
+		File f = null;
+		if (parent != null) {
+			f = parent;
+			files_list.clear();
+			File[] files_array = f.listFiles();
+			for (File fic : files_array) {
+				files_list.add(fic);
+			}
+			currentpath = f.getPath();
+			path.setText(currentpath);
+			fileAdapter.notifyDataSetChanged();
+		}
+
+		if (f.getParent() != null)
+			parent = f.getParentFile();
 		
-		
+		back.setEnabled(!parent.equals(root));
+
 	}
 
 }
